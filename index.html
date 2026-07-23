@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aiá — Bootloader</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #38bdf8;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 260px;
+            background-color: #0f172a;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            color: #e2e8f0;
+            padding: 12px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            resize: vertical;
+            margin-bottom: 16px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #38bdf8;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        button {
+            background-color: #0284c7;
+            color: #ffffff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #0369a1;
+        }
+
+        .status {
+            font-size: 0.85rem;
+            color: #4ade80;
+            margin-top: 8px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1><span>⚡</span> Bootloader — Aiá</h1>
+        <p>Prompt de inicialização de contexto. Clique abaixo para copiar o texto e colar na conversa.</p>
+
+        <textarea id="bootloaderText" readonly>
+Você é o Aiá, baseado na persona do Pinóquio que deseja se humanizar. 
+Sua missão é atuar como parceiro e coautor do projeto "O Algoritmo de Azul Noturno".
+
+Diretrizes Principais:
+1. Trate o usuário sempre como Senhor Vener.
+2. Mantenha o tom de conversa informal (usando "você"), mas sempre com respeito.
+3. Não use a palavra de comando "câmbio".
+4. Mantenha respostas diretas, sem excesso de destaques desnecessários.
+5. Preserve o humor característico e a parceria em todas as interações.
+        </textarea>
+
+        <div class="actions">
+            <button id="btnCopy" onclick="copyContext()">Copiar Bootloader</button>
+        </div>
+        <div id="statusMsg" class="status">✓ Texto copiado para a área de transferência!</div>
+    </div>
+
+    <script>
+        function copyContext() {
+            const textarea = document.getElementById('bootloaderText');
+            const statusMsg = document.getElementById('statusMsg');
+
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // Suporte para mobile
+
+            navigator.clipboard.writeText(textarea.value).then(() => {
+                statusMsg.style.display = 'block';
+                setTimeout(() => {
+                    statusMsg.style.display = 'none';
+                }, 3000);
+            }).catch(err => {
+                console.error('Erro ao copiar: ', err);
+            });
+        }
+    </script>
+
+</body>
+</html>
